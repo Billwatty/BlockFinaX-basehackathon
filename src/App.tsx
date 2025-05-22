@@ -13,26 +13,32 @@ import { useWeb3 } from "./hooks/useWeb3";
 import { AppProvider } from "./context/AppContext";
 import { Web3Provider } from "./context/Web3Context";
 import LogisticsPage from "./pages/LogisticsPage";
-
+import { cookieToInitialState } from "@account-kit/core";
+import { config } from "../config";
+import { Providers } from "./provider";
 // Import stablecoin components
 import StablecoinWallet from "../../components/wallet/StablecoinWallet";
 import StablecoinInvoice from "../../components/invoice/StablecoinInvoice";
 import InvoicePage from "@/components/invoice/InvoicePage";
+import { useMemo } from "react";
 
 // Auth-protected route component
-const PrivateRoute = ({ component: Component, path, ...rest }: { component: React.ComponentType<any>, path: string }) => {
+const PrivateRoute = ({
+  component: Component,
+  path,
+  ...rest
+}: {
+  component: React.ComponentType<any>;
+  path: string;
+}) => {
   const { isLoggedIn } = useWeb3();
-  
+
   return (
     <Route
       path={path}
       {...rest}
-      component={(params: any) => 
-        isLoggedIn ? (
-          <Component {...params} />
-        ) : (
-          <Redirect to="/" />
-        )
+      component={(params: any) =>
+        isLoggedIn ? <Component {...params} /> : <Redirect to="/" />
       }
     />
   );
@@ -43,27 +49,27 @@ function Router() {
     <Layout>
       <Switch>
         <Route path="/" component={HomePage} />
-        
+
         {/* Contract routes */}
         <Route path="/contracts" component={ContractsPage} />
         <Route path="/contracts/new" component={ContractsPage} />
         <Route path="/contracts/:id">
           {(params) => <ContractDetailsPage contractId={params.id} />}
         </Route>
-        
+
         {/* Document routes */}
         <Route path="/documents" component={DocumentsPage} />
         <Route path="/documents/upload" component={DocumentsPage} />
-        
+
         {/* Wallet routes */}
         <Route path="/wallet" component={WalletPage} />
-        
+
         {/* Invoice routes */}
         <Route path="/invoices" component={InvoicePage} />
-        
+
         {/* Logistics routes */}
         <Route path="/logistics" component={LogisticsPage} />
-        
+
         {/* Other routes */}
         <Route path="/api">
           {() => <NotFound customMessage="API documentation coming soon" />}
@@ -71,22 +77,28 @@ function Router() {
         <Route path="/docs">
           {() => <NotFound customMessage="Documentation coming soon" />}
         </Route>
-        <Route>
-          {() => <NotFound customMessage="Page not found" />}
-        </Route>
+        <Route>{() => <NotFound customMessage="Page not found" />}</Route>
       </Switch>
     </Layout>
   );
 }
 
+const getInitialState = () => {
+  if (typeof document === "undefined") return undefined;
+  const cookie = document.cookie;
+  return cookieToInitialState(config, cookie);
+};
+
 function App() {
+  const initialState = useMemo(() => getInitialState(), []);
+
   return (
     <AppProvider>
       <Web3Provider>
-        <QueryClientProvider client={queryClient}>
+        <Providers initialState={initialState}>
           <Router />
           <Toaster />
-        </QueryClientProvider>
+        </Providers>
       </Web3Provider>
     </AppProvider>
   );
