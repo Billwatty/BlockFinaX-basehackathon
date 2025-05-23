@@ -15,10 +15,10 @@ import { Web3Provider } from "./context/Web3Context";
 import LogisticsPage from "./pages/LogisticsPage";
 import { cookieToInitialState } from "@account-kit/core";
 import { config } from "../config";
-import { Providers } from "./provider";
+import { Providers } from "./pages/provider";
 // Import stablecoin components
-import StablecoinWallet from "../../components/wallet/StablecoinWallet";
-import StablecoinInvoice from "../../components/invoice/StablecoinInvoice";
+// import StablecoinWallet from "./components/wallet/StablecoinWallet";
+// import StablecoinInvoice from "./components/invoice/StablecoinInvoice";
 import InvoicePage from "@/components/invoice/InvoicePage";
 import { useMemo } from "react";
 

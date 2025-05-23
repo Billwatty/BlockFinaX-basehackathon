@@ -1,8 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
-  content: [
-    './src/**/*.{ts,tsx}',
+  content: ["./src/**/*.{ts,tsx}"],
+  safelist: [
+    "border-border",
+    "text-foreground",
+    "bg-background",
+    "border-muted",
+    "border-primary",
+    "border-secondary",
+    "border-destructive",
   ],
   theme: {
     container: {
@@ -70,4 +77,4 @@ export default {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
