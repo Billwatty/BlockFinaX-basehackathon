@@ -15,8 +15,8 @@ import { Web3Provider } from "./context/Web3Context";
 import LogisticsPage from "./pages/LogisticsPage";
 
 // Import stablecoin components
-import StablecoinWallet from "../../components/wallet/StablecoinWallet";
-import StablecoinInvoice from "../../components/invoice/StablecoinInvoice";
+// import StablecoinWallet from "../../components/wallet/StablecoinWallet";
+// import StablecoinInvoice from "../../components/invoice/StablecoinInvoice";
 import InvoicePage from "@/components/invoice/InvoicePage";
 
 // Auth-protected route component

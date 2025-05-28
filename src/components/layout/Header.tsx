@@ -81,10 +81,10 @@ const UserMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
+        <Button variant="ghost" className="relative w-8 h-8 rounded-full">
+          <Avatar className="w-8 h-8">
             <AvatarImage src={user?.profileImage} alt={user?.username} />
-            <AvatarFallback className="bg-primary text-white">
+            <AvatarFallback className="text-white bg-primary">
               {user?.username?.charAt(0) || 'U'}
             </AvatarFallback>
           </Avatar>
@@ -99,20 +99,20 @@ const UserMenu = () => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem disabled>
-          <User className="mr-2 h-4 w-4" />
+          <User className="w-4 h-4 mr-2" />
           <span>Profile</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Link href="/wallet">
-            <div className="flex items-center cursor-pointer w-full">
-              <Wallet className="mr-2 h-4 w-4" />
+            <div className="flex items-center w-full cursor-pointer">
+              <Wallet className="w-4 h-4 mr-2" />
               <span>Wallet</span>
             </div>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={logoutUser}>
-          <LogOut className="mr-2 h-4 w-4" />
+          <LogOut className="w-4 h-4 mr-2" />
           <span>Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -136,9 +136,9 @@ const Header = () => {
               onClick={toggleSidebar}
               className="mr-2 md:hidden"
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="w-6 h-6" />
             </Button>
-            <h1 className="text-xl font-bold text-primary">Base Stablecoins</h1>
+            <h1 className="text-xl font-bold text-primary">BlockFinax</h1>
           </div>
           <div className="flex items-center">
             {isLoggedIn ? (
@@ -153,7 +153,7 @@ const Header = () => {
                   }}
                   className="flex items-center gap-1"
                 >
-                  <UserPlus className="h-4 w-4" />
+                  <UserPlus className="w-4 h-4" />
                   <span>Register</span>
                 </Button>
                 
